@@ -29,7 +29,7 @@ export default function TestManagement() {
     if (formData.writingHtml) data.append('writingHtml', formData.writingHtml);
 
     try {
-      const res = await fetch('http://localhost:3001/api/tests', {
+      const res = await fetch('/api/tests', {
         method: 'POST',
         body: data
       });

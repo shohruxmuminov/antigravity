@@ -11,7 +11,7 @@ export default function ReviewPanel() {
 
   const fetchSessions = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/api/sessions?search=${search}`);
+      const res = await fetch(`/api/sessions?search=${search}`);
       const data = await res.json();
       setSessions(data);
     } catch (err) {
@@ -102,7 +102,7 @@ export default function ReviewPanel() {
             <div>
               <h5 className="mb-3">Writing Essay</h5>
               {selectedSession.writingPdfPath ? (
-                <a href={`http://localhost:3001/uploads/${selectedSession.writingPdfPath}`} target="_blank" rel="noreferrer" className="btn btn-primary">
+                <a href={`/uploads/${selectedSession.writingPdfPath}`} target="_blank" rel="noreferrer" className="btn btn-primary">
                   Download PDF Essay
                 </a>
               ) : (

@@ -20,7 +20,7 @@ export default function TestRunner() {
   useEffect(() => {
     const fetchSessionAndTest = async () => {
       try {
-        const res = await fetch(`http://localhost:3001/api/sessions?search=${user.code}`);
+        const res = await fetch(`/api/sessions?search=${user.code}`);
         const sessions = await res.json();
         const activeSession = sessions.find(s => s.id === parseInt(sessionId));
         if (!activeSession) return navigate('/candidate');
@@ -30,7 +30,7 @@ export default function TestRunner() {
         if (activeSession.status === 'banned') return setBanned(true);
         if (activeSession.status === 'completed') return setCurrentStep('completed');
 
-        const testRes = await fetch('http://localhost:3001/api/tests');
+        const testRes = await fetch('/api/tests');
         const tests = await testRes.json();
         const activeTest = tests.find(t => t.id === activeSession.testId);
         setTest(activeTest);
@@ -46,7 +46,7 @@ export default function TestRunner() {
     };
     fetchSessionAndTest();
 
-    socketRef.current = io('http://localhost:3001');
+    socketRef.current = io();
     socketRef.current.emit('register_candidate', user.code);
 
     socketRef.current.on('receive_warning', (data) => {
@@ -77,7 +77,7 @@ export default function TestRunner() {
   }, [sessionId, user, navigate, currentStep]);
 
   const updateSession = async (section, status = 'active', payload = {}) => {
-    await fetch(`http://localhost:3001/api/sessions/${sessionId}/update`, {
+    await fetch(`/api/sessions/${sessionId}/update`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ currentSection: section, status, ...payload })
@@ -124,7 +124,7 @@ export default function TestRunner() {
     const formData = new FormData();
     formData.append('writingPdf', file);
 
-    const res = await fetch(`http://localhost:3001/api/sessions/${sessionId}/writing`, {
+    const res = await fetch(`/api/sessions/${sessionId}/writing`, {
       method: 'POST',
       body: formData
     });
@@ -203,7 +203,7 @@ export default function TestRunner() {
           </div>
           {test.listeningAudioPath && (
             <div className="bg-dark p-3 text-center" style={{ background: '#1a1a1a' }}>
-              <audio controls autoPlay src={`http://localhost:3001/uploads/${test.listeningAudioPath}`} style={{ width: '50%' }} />
+              <audio controls autoPlay src={`/uploads/${test.listeningAudioPath}`} style={{ width: '50%' }} />
             </div>
           )}
           <div style={{ flex: 1, overflow: 'hidden' }}>

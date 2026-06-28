@@ -10,7 +10,7 @@ export default function CandidateDashboard() {
   useEffect(() => {
     const fetchTests = async () => {
       try {
-        const res = await fetch('http://localhost:3001/api/tests');
+        const res = await fetch('/api/tests');
         const data = await res.json();
         setTests(data);
       } catch (err) {
@@ -22,7 +22,7 @@ export default function CandidateDashboard() {
 
   const handleStartTest = async (testId) => {
     try {
-      const res = await fetch('http://localhost:3001/api/sessions/start', {
+      const res = await fetch('/api/sessions/start', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ candidateId: user.id, testId })

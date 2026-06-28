@@ -15,7 +15,7 @@ export default function AdminDashboard() {
   const [alerts, setAlerts] = useState([]);
 
   useEffect(() => {
-    socket = io('http://localhost:3001');
+    socket = io();
     socket.emit('register_admin');
 
     socket.on('alert_fullscreen_exit', (data) => {

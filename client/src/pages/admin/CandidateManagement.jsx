@@ -11,7 +11,7 @@ export default function CandidateManagement() {
 
   const fetchCandidates = async () => {
     try {
-      const res = await fetch(`http://localhost:3001/api/candidates?search=${search}`);
+      const res = await fetch(`/api/candidates?search=${search}`);
       const data = await res.json();
       setCandidates(data);
     } catch (err) {
@@ -24,7 +24,7 @@ export default function CandidateManagement() {
     if (!fullName) return;
 
     try {
-      const res = await fetch('http://localhost:3001/api/candidates', {
+      const res = await fetch('/api/candidates', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fullName })

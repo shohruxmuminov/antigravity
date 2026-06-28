@@ -20,7 +20,7 @@ export default function Login() {
     }
 
     try {
-      const res = await fetch('http://localhost:3001/api/candidate/login', {
+      const res = await fetch('/api/candidate/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code })
@@ -43,7 +43,7 @@ export default function Login() {
     setError('');
     
     try {
-      const res = await fetch('http://localhost:3001/api/admin/login', {
+      const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })

@@ -31,6 +31,14 @@ app.use('/uploads', express.static(uploadsDir));
 const apiRoutes = require('./routes/api');
 app.use('/api', apiRoutes);
 
+// Serve static React app in production
+const clientDist = path.join(__dirname, '../client/dist');
+app.use(express.static(clientDist));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientDist, 'index.html'));
+});
+
 // Socket.io for Real-time warnings & Fullscreen monitoring
 io.on('connection', (socket) => {
   console.log('A user connected:', socket.id);
