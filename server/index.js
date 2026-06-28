@@ -82,12 +82,17 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3001;
 
-// Initialize Database then Start Server
+// Initialize Database
 initDb().then(() => {
   console.log('Database initialized successfully.');
-  server.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
 }).catch(err => {
   console.error('Failed to initialize database:', err);
 });
+
+if (!process.env.VERCEL) {
+  server.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+
+module.exports = app;
