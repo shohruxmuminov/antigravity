@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { AuthProvider, useAuth } from './context/AuthContext';
 import ThreeBackground from './components/ThreeBackground';
 
-import Login from './pages/Login';
+import Home from './pages/Home';
 import AdminDashboard from './pages/admin/Dashboard';
 import CandidateDashboard from './pages/candidate/Dashboard';
 import TestRunner from './pages/candidate/TestRunner';
@@ -28,7 +28,7 @@ function AppRoutes() {
       <ThreeBackground />
       <div style={{ position: 'relative', zIndex: 1, minHeight: '100vh' }}>
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Home />} />
           
           <Route path="/admin/*" element={
             <ProtectedRoute allowedRole="admin">
